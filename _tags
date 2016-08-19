@@ -1,0 +1,120 @@
+<**/*.ml{,i}>: warn(-40), no_alias_deps
+<**/*>: thread
+# This prevents the implicit addition of -ppx options by ocamlfind
+<**/*>: predicate(custom_ppx)
+<as_ppx/ppx.{byte,native}>: predicate(ppx_driver)
+<common/*.ml>: for-pack(Expect_test_common)
+<matcher/*.ml>: for-pack(Expect_test_matcher)
+<src/*.ml>: for-pack(Ppx_expect)
+<src/*>: linkall
+<collector/*.ml{,i}>: ppx-driver(ppx_custom_printf+ppx_fields_conv+ppx_inline_test -inline-test-drop -inline-test-lib fake_for_drop)
+<common/*.ml{,i}>: ppx-driver(ppx_compare+ppx_sexp_conv)
+<evaluator/*.ml{,i}>: ppx-driver(ppx_custom_printf)
+<matcher/*.ml{,i}>: ppx-driver(ppx_assert+ppx_compare+ppx_custom_printf+ppx_inline_test+ppx_sexp_conv+ppx_variants_conv -inline-test-drop -inline-test-lib fake_for_drop)
+<namespace_wrappers/*>: warn(-49)
+"namespace_wrappers": include
+# OASIS_START
+# DO NOT EDIT (digest: f9d7cb0bad96615769cb018e683fe635)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library expect_test_common
+"common/expect_test_common.cmxs": use_expect_test_common
+"common/expectation.cmx": for-pack(Expect_test_common)
+"common/file.cmx": for-pack(Expect_test_common)
+"common/std.cmx": for-pack(Expect_test_common)
+<common/*.ml{,i,y}>: package(sexplib)
+# Library expect_test_config
+"config/expect_test_config.cmxs": use_expect_test_config
+# Library expect_test_collector
+"collector/expect_test_collector.cmxs": use_expect_test_collector
+<collector/*.ml{,i,y}>: package(fieldslib)
+<collector/*.ml{,i,y}>: package(ppx_inline_test.runtime-lib)
+<collector/*.ml{,i,y}>: package(sexplib)
+<collector/*.ml{,i,y}>: use_expect_test_common
+<collector/*.ml{,i,y}>: use_expect_test_config
+# Library expect_test_matcher
+"matcher/expect_test_matcher.cmxs": use_expect_test_matcher
+"matcher/choose_tag.cmx": for-pack(Expect_test_matcher)
+"matcher/cst.cmx": for-pack(Expect_test_matcher)
+"matcher/fmt.cmx": for-pack(Expect_test_matcher)
+"matcher/lexer.cmx": for-pack(Expect_test_matcher)
+"matcher/matcher.cmx": for-pack(Expect_test_matcher)
+"matcher/reconcile.cmx": for-pack(Expect_test_matcher)
+"matcher/std.cmx": for-pack(Expect_test_matcher)
+<matcher/expect_test_matcher.{cma,cmxa}>: use_libexpect_test_matcher_stubs
+<matcher/*.ml{,i,y}>: package(ppx_assert.runtime-lib)
+<matcher/*.ml{,i,y}>: package(ppx_inline_test.runtime-lib)
+<matcher/*.ml{,i,y}>: package(re)
+<matcher/*.ml{,i,y}>: package(re.emacs)
+<matcher/*.ml{,i,y}>: package(sexplib)
+<matcher/*.ml{,i,y}>: package(variantslib)
+<matcher/*.ml{,i,y}>: use_expect_test_common
+"matcher/fnmatch_stub.c": package(ppx_assert.runtime-lib)
+"matcher/fnmatch_stub.c": package(ppx_inline_test.runtime-lib)
+"matcher/fnmatch_stub.c": package(re)
+"matcher/fnmatch_stub.c": package(re.emacs)
+"matcher/fnmatch_stub.c": package(sexplib)
+"matcher/fnmatch_stub.c": package(variantslib)
+"matcher/fnmatch_stub.c": use_expect_test_common
+# Object ppx_expect_evaluator
+<evaluator/*.ml{,i,y}>: package(fieldslib)
+<evaluator/*.ml{,i,y}>: package(ppx_assert.runtime-lib)
+<evaluator/*.ml{,i,y}>: package(ppx_inline_test.runtime-lib)
+<evaluator/*.ml{,i,y}>: package(re)
+<evaluator/*.ml{,i,y}>: package(re.emacs)
+<evaluator/*.ml{,i,y}>: package(sexplib)
+<evaluator/*.ml{,i,y}>: package(variantslib)
+<evaluator/*.ml{,i,y}>: use_expect_test_collector
+<evaluator/*.ml{,i,y}>: use_expect_test_common
+<evaluator/*.ml{,i,y}>: use_expect_test_config
+<evaluator/*.ml{,i,y}>: use_expect_test_matcher
+# Library ppx_expect_payload
+"expect_payload/ppx_expect_payload.cmxs": use_ppx_expect_payload
+<expect_payload/*.ml{,i,y}>: package(ppx_core)
+<expect_payload/*.ml{,i,y}>: package(ppx_tools.metaquot)
+<expect_payload/*.ml{,i,y}>: package(sexplib)
+<expect_payload/*.ml{,i,y}>: use_expect_test_common
+# Library ppx_expect
+"src/ppx_expect.cmxs": use_ppx_expect
+"src/expect_extension.cmx": for-pack(Ppx_expect)
+"src/main.cmx": for-pack(Ppx_expect)
+<src/*.ml{,i,y}>: package(ppx_core)
+<src/*.ml{,i,y}>: package(ppx_driver)
+<src/*.ml{,i,y}>: package(ppx_inline_test)
+<src/*.ml{,i,y}>: package(ppx_inline_test.libname)
+<src/*.ml{,i,y}>: package(ppx_tools.metaquot)
+<src/*.ml{,i,y}>: package(sexplib)
+<src/*.ml{,i,y}>: use_expect_test_common
+<src/*.ml{,i,y}>: use_ppx_expect_payload
+# Executable ppx
+<as_ppx/ppx.{native,byte}>: package(ppx_core)
+<as_ppx/ppx.{native,byte}>: package(ppx_driver)
+<as_ppx/ppx.{native,byte}>: package(ppx_inline_test)
+<as_ppx/ppx.{native,byte}>: package(ppx_inline_test.libname)
+<as_ppx/ppx.{native,byte}>: package(ppx_tools.metaquot)
+<as_ppx/ppx.{native,byte}>: package(sexplib)
+<as_ppx/ppx.{native,byte}>: use_expect_test_common
+<as_ppx/ppx.{native,byte}>: use_ppx_expect
+<as_ppx/ppx.{native,byte}>: use_ppx_expect_payload
+<as_ppx/*.ml{,i,y}>: package(ppx_core)
+<as_ppx/*.ml{,i,y}>: package(ppx_driver)
+<as_ppx/*.ml{,i,y}>: package(ppx_inline_test)
+<as_ppx/*.ml{,i,y}>: package(ppx_inline_test.libname)
+<as_ppx/*.ml{,i,y}>: package(ppx_tools.metaquot)
+<as_ppx/*.ml{,i,y}>: package(sexplib)
+<as_ppx/*.ml{,i,y}>: use_expect_test_common
+<as_ppx/*.ml{,i,y}>: use_ppx_expect
+<as_ppx/*.ml{,i,y}>: use_ppx_expect_payload
+# OASIS_STOP
