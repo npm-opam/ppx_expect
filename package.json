@@ -1,0 +1,56 @@
+{
+    "name": "ppx_expect",
+    "optionalDependencies": {},
+    "exportedEnvVars": {
+        "PATH": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/bin"
+        },
+        "version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "113.33.03"
+        },
+        "ppx_expect_version": {
+            "global": true,
+            "globalCollisionBehavior": "clobber",
+            "val": "113.33.03"
+        },
+        "FINDLIB": {
+            "global": true,
+            "resolveAsRelativePath": true,
+            "globalCollisionBehavior": "joinPath",
+            "val": "./_build/ocamlfind/lib"
+        }
+    },
+    "version": "113.33.03",
+    "dependencies": {
+        "ppx_core": "https://github.com/npm-opam/ppx_core",
+        "dependency-env": "https://github.com/npm-ml/dependency-env.git",
+        "substs": "https://github.com/yunxing/substs.git",
+        "ppx_variants_conv": "https://github.com/npm-opam/ppx_variants_conv",
+        "sexplib": "https://github.com/npm-opam/sexplib",
+        "nopam": "https://github.com/yunxing/nopam.git",
+        "ppx_fields_conv": "https://github.com/npm-opam/ppx_fields_conv",
+        "re": "https://github.com/npm-opam/re",
+        "opam-installer-bin": "https://github.com/yunxing/opam-installer-bin.git",
+        "ocamlbuild": "https://github.com/npm-opam/ocamlbuild",
+        "ppx_assert": "https://github.com/npm-opam/ppx_assert",
+        "ocamlfind": "https://github.com/npm-opam/ocamlfind",
+        "ppx_tools": "https://github.com/npm-opam/ppx_tools",
+        "ppx_sexp_conv": "https://github.com/npm-opam/ppx_sexp_conv",
+        "variantslib": "https://github.com/npm-opam/variantslib",
+        "js-build-tools": "https://github.com/npm-opam/js-build-tools",
+        "ppx_driver": "https://github.com/npm-opam/ppx_driver",
+        "ppx_custom_printf": "https://github.com/npm-opam/ppx_custom_printf",
+        "ppx_compare": "https://github.com/npm-opam/ppx_compare",
+        "ppx_inline_test": "https://github.com/npm-opam/ppx_inline_test",
+        "ocaml": "https://github.com/npm-opam/ocaml.git#npm-4.02.3",
+        "fieldslib": "https://github.com/npm-opam/fieldslib"
+    },
+    "scripts": {
+        "postinstall": "eval $(dependencyEnv) && nopam && ./configure --prefix $opam_prefix && make && (opam-installer --prefix=$opam_prefix || true) && injectOpamEnvs"
+    }
+}
